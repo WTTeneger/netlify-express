@@ -35,20 +35,22 @@ router.get('/', (req, res) => {
 router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
 router.post('/', (req, res) => res.json({ postBody: req.body }));
 
-router.get('/post', (req, res) => {
+router.get('/post', async (req, res) => {
     let account = req.query.account || "@amal_agishev"
     let post_id = req.query.post_id || 'XCi4p26c0Tl'
-    getNewsArea(account, post_id).then((data) => {
+    let data = { post: 'error' }
+    await getNewsArea(account, post_id).then((_sa) => {
         // console.log('data', data);
-        if (!data) res.json({ post: 'error' })
-        res.json({ post: data[0] })
-    })
-    res.json({
-        post: {
-            account: account,
-            post_id: post_id
+        if (!_sa) {
+            data = { post: 'error' }
+            return false
+        } else {
+            data = { post: data[0] }
+            return true
+
         }
     })
+    res.json(data)
 })
 
 app.use(bodyParser.json());
