@@ -4,7 +4,7 @@ const path = require('path');
 const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
-// const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 
 async function getNewsArea(account = "@amal_agishev", post_id = 'XCi4p26c0Tl') {
