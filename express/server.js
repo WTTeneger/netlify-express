@@ -40,19 +40,9 @@ router.get('/post', async (req, res) => {
     let account = req.query.account || "@amal_agishev"
     let post_id = req.query.post_id || 'XCi4p26c0Tl'
     let data = { post: 'error' }
-    await getNewsArea(account, post_id).then((_sa) => {
-        if (!_sa) {
-            data = { post: 'error' }
-            console.log('error', data);
-            return false
-        } else {
-            data = { post: _sa[0] }
-            console.log('post', data);
-            return true
-
-        }
-    })
-    res.json(data)
+    let a = await getNewsArea(account, post_id)
+    // })
+    res.json({ post: 'asd' });
 })
 
 app.use(bodyParser.json());
