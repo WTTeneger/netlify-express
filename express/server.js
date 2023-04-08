@@ -20,7 +20,7 @@ async function getNewsArea(account = "@amal_agishev", post_id = 'XCi4p26c0Tl') {
         // })
         return data
     } catch (error) {
-        return { post: 'error' }
+        return { post: error }
         // callback(error)
     }
     // let adata = await fetch(`https://teletype.in/${account}/${post_id}`, requestOptions)
