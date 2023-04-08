@@ -12,13 +12,16 @@ async function getNewsArea(account = "@amal_agishev", post_id = 'XCi4p26c0Tl') {
     try {
         const response = await fetch('https://cat-fact.herokuapp.com/facts')
         const data = await checkStatus(response)
-        callback(null, {
-            statusCode: 200,
-            headers: { 'Content-Type': 'application/json' },
-            // body: JSON.stringify(data)
-        })
+        console.log(data);
+        // callback(null, {
+        //     statusCode: 200,
+        //     headers: { 'Content-Type': 'application/json' },
+        //     // body: JSON.stringify(data)
+        // })
+        return data
     } catch (error) {
-        callback(error)
+        return { post: 'error' }
+        // callback(error)
     }
     // let adata = await fetch(`https://teletype.in/${account}/${post_id}`, requestOptions)
         // .then(response => response.text())
@@ -48,7 +51,10 @@ router.get('/post', async (req, res) => {
     let data = { post: 'error' }
     let a = await getNewsArea(account, post_id)
     // })
-    res.json({ post: 'asd' });
+    res.json({
+        post: 'asd',
+        a: a
+    });
 })
 
 app.use(bodyParser.json());
