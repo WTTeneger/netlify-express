@@ -8,23 +8,21 @@ const fetch = require('node-fetch');
 
 
 async function getNewsArea(account = "@amal_agishev", post_id = 'XCi4p26c0Tl') {
-    let BlogState = ''
     var requestOptions = {
         method: 'GET',
         redirect: 'manual'
     };
-
     let adata = await fetch(`https://teletype.in/${account}/${post_id}`, requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            // получить <article>   </article>
-            let article = result.match(/<article(.*?)<\/article>/g)
-            // console.log(article);
-            return article
-        })
-        .catch(error => console.log('error', error));
-    console.log(adata);
-    return adata
+        // .then(response => response.text())
+        // .then(result => {
+        //     // получить <article>   </article>
+        //     let article = result.match(/<article(.*?)<\/article>/g)
+        //     // console.log(article);
+        //     return article
+        // })
+        // .catch(error => console.log('error', error));
+    // console.log(adata);
+    return { post: 'asd' }
 }
 
 const router = express.Router();
@@ -40,7 +38,7 @@ router.get('/post', async (req, res) => {
     let account = req.query.account || "@amal_agishev"
     let post_id = req.query.post_id || 'XCi4p26c0Tl'
     let data = { post: 'error' }
-    // let a = await getNewsArea(account, post_id)
+    let a = await getNewsArea(account, post_id)
     // })
     res.json({ post: 'asd' });
 })
