@@ -8,11 +8,19 @@ const fetch = require('node-fetch');
 
 
 async function getNewsArea(account = "@amal_agishev", post_id = 'XCi4p26c0Tl') {
-    var requestOptions = {
-        method: 'GET',
-        redirect: 'manual'
-    };
-    let adata = await fetch(`https://teletype.in/${account}/${post_id}`, requestOptions)
+
+    try {
+        const response = await fetch('https://cat-fact.herokuapp.com/facts')
+        const data = await checkStatus(response)
+        callback(null, {
+            statusCode: 200,
+            headers: { 'Content-Type': 'application/json' },
+            // body: JSON.stringify(data)
+        })
+    } catch (error) {
+        callback(error)
+    }
+    // let adata = await fetch(`https://teletype.in/${account}/${post_id}`, requestOptions)
         // .then(response => response.text())
         // .then(result => {
         //     // получить <article>   </article>
