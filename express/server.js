@@ -38,17 +38,17 @@ router.post('/', (req, res) => res.json({ postBody: req.body }));
 router.get('/post', (req, res) => {
     let account = req.query.account || "@amal_agishev"
     let post_id = req.query.post_id || 'XCi4p26c0Tl'
-    //     // getNewsArea(account, post_id).then((data) => {
-    //     //     console.log('data', data);
-    //     //     // if (!data) return res.json({ post: 'error' })
-    //     //     // return res.json({ post: data[0] })
-    //     // })
-    res.json({
-        post: {
-            account: account,
-            post_id: post_id
-        }
+    getNewsArea(account, post_id).then((data) => {
+        console.log('data', data);
+        if (!data) res.json({ post: 'error' })
+        res.json({ post: data[0] })
     })
+    // res.json({
+    //     post: {
+    //         account: account,
+    //         post_id: post_id
+    //     }
+    // })
 })
 
 app.use(bodyParser.json());
