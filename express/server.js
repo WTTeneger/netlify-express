@@ -14,7 +14,7 @@ async function getNewsArea(account = "@amal_agishev", post_id = 'XCi4p26c0Tl') {
         redirect: 'manual'
     };
 
-    let a = await fetch(`https://teletype.in/${account}/${post_id}`, requestOptions)
+    let adata = await fetch(`https://teletype.in/${account}/${post_id}`, requestOptions)
         .then(response => response.text())
         .then(result => {
             // получить <article>   </article>
@@ -23,7 +23,8 @@ async function getNewsArea(account = "@amal_agishev", post_id = 'XCi4p26c0Tl') {
             return article
         })
         .catch(error => console.log('error', error));
-    return a
+    console.log(adata);
+    return adata
 }
 
 const router = express.Router();
@@ -40,12 +41,13 @@ router.get('/post', async (req, res) => {
     let post_id = req.query.post_id || 'XCi4p26c0Tl'
     let data = { post: 'error' }
     await getNewsArea(account, post_id).then((_sa) => {
-        // console.log('data', data);
         if (!_sa) {
             data = { post: 'error' }
+            console.log('error', data);
             return false
         } else {
-            data = { post: data[0] }
+            data = { post: _sa[0] }
+            console.log('post', data);
             return true
 
         }
