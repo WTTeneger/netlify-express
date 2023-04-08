@@ -22,6 +22,7 @@ async function getNewsArea(account = "@amal_agishev", post_id = 'XCi4p26c0Tl') {
         // })
         // return { posts: data }
     } catch (error) {
+        console.log(error);
         return { post: error }
         // callback(error)
     }
