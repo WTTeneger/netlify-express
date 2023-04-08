@@ -11,14 +11,16 @@ async function getNewsArea(account = "@amal_agishev", post_id = 'XCi4p26c0Tl') {
 
     try {
         const response = await fetch('https://cat-fact.herokuapp.com/facts')
-        const data = await checkStatus(response)
-        console.log(data);
+        return { posts: response }
+        
+        // const data = await checkStatus(response)
+        // console.log(data);
         // callback(null, {
         //     statusCode: 200,
         //     headers: { 'Content-Type': 'application/json' },
         //     // body: JSON.stringify(data)
         // })
-        return data
+        // return { posts: data }
     } catch (error) {
         return { post: error }
         // callback(error)
